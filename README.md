@@ -16,15 +16,15 @@ myapp.config(function(tjResourceProvider) {
   });
 });
 ```
-- Inject `tjResource` into your controller (or service/factory). Instantiate with collection name and default `Resource` (optional) like so:
+- Inject `Resource` into your controller (or service/factory). Instantiate with collection name and default `Resource` (optional) like so:
 ```javascript
 // simple example
-myapp.service('posts', function(tjResource) {
-  return new tjResource('posts');
+myapp.service('posts', function(Resource) {
+  return new Resource('posts');
 })
 
 // advanced example
-myapp.service('People', function(tjResource) {
+myapp.service('People', function(Resource) {
   var resource = function(data) {
     // do any transformation on data when Resource is initiated (ie converting strings into real dates, etc).
     this.dob = new Date(this.dob);
@@ -42,26 +42,26 @@ myapp.service('People', function(tjResource) {
     });
   }
 
-  return new tjResource('people', resource);
+  return new Resource('people', resource);
 });
 ```
 ##Methods
 Note: All methods are promise based.
 
 ###Factory Methods
-`tjResource` exposes the following methods:
+`Resource` exposes the following methods:
 
 - `query` - Makes a `GET` call to a collection. Note, returned results are converted into instantiated `Resources` that have all `prototype` methods available.
 - `load` - Loads a single resource.
 
 ###Resource Methods
-`tjResource` also exposes the following default methods for each `Resource`:
+`Resource` also exposes the following default methods for each `Resource`:
 
 - `save` - Calls `POST` (for new items) or `PUT` for existing items.
 - `delete` - Calls `DELETE` for an item.
 
 ###Resource Hooks
-`tjResource` also exposes the following hooks for each `Resource`:
+`Resource` also exposes the following hooks for each `Resource`:
 
 - `preSave` - Promised-based method that is called before a `Resource` is saved
 - `postSave` - Promised-based method that is called after a `Resource` is saved
